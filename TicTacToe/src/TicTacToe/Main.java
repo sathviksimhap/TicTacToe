@@ -75,6 +75,7 @@ public class Main
 	}
 	public static void main(String[] args) 
 	{
+		boolean gitCheck = true;
 		char board[][] = {{'.', '.','.'},{'.', '.','.'},{'.', '.','.'}};
 		Set<Integer> spots_left = new HashSet<>();
 		
