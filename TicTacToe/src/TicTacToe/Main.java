@@ -45,7 +45,7 @@ public class Main
 		//Draw
 		for(char i[] : board)
 			for(char j : i)
-				if(j=='.')
+				if(j==' ')
 					return 0;
 		
 		return 2;	
@@ -75,7 +75,7 @@ public class Main
 	}
 	public static void main(String[] args) 
 	{
-		char board[][] = {{'.', '.','.'},{'.', '.','.'},{'.', '.','.'}};
+		char board[][] = {{' ', ' ',' '},{' ', ' ',' '},{' ', ' ',' '}};
 		Set<Integer> spots_left = new HashSet<>();
 		
 		Scanner sc = new Scanner(System.in);
