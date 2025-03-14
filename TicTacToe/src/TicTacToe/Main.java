@@ -83,8 +83,11 @@ public class Main
 		System.out.println("Input for your choices: ");
 		System.out.println("[0][1][2]\n[3][4][5]\n[6][7][8]");
 		
+		GameAI ai = new GameAI(board);
+		
+		
 		while(true)
-		{
+		{			
 			//Player 1
 			printArray(board);		
 			System.out.println("Player 1 Turn: ");
@@ -104,6 +107,10 @@ public class Main
 			
 			if(checkGameOver(board))
 				break;
+			
+		
+			System.out.println("AI Chooses: " + ai.chooseSpot(board));
+			System.out.println("Tripler says: " + ai.tripler(board));
 			
 			//Player 2	
 			printArray(board);		
