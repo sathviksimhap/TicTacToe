@@ -20,7 +20,7 @@ public class Main
 		{	
 			if((board[i][0] == 'X')&&(board[i][1] == 'X') &&(board[i][2] == 'X'))
 				return 1;
-			if((board[i][0] == 'O')&&(board[i][1] == 'O') &&(board[i][2] == ')'))
+			if((board[i][0] == 'O')&&(board[i][1] == 'O') &&(board[i][2] == 'O'))
 				return -1;
 		}
 		//Columns
@@ -28,7 +28,7 @@ public class Main
 		{	
 			if((board[0][i] == 'X')&&(board[1][i] == 'X') &&(board[2][i] == 'X'))
 				return 1;
-			if((board[0][i] == 'O')&&(board[1][i] == 'O') &&(board[2][i] == ')'))
+			if((board[0][i] == 'O')&&(board[1][i] == 'O') &&(board[2][i] == 'O'))
 				return -1;
 		}
 		//Diagonals
@@ -62,7 +62,7 @@ public class Main
 		else if(game_over == -1)	
 		{
 			printArray(board);
-			System.out.println("Player 2 Wins!");
+			System.out.println("Computer Wins!");
 			return true;
 		}
 		else if(game_over == 0)
@@ -86,49 +86,46 @@ public class Main
 		
 		GameAI ai = new GameAI(board);
 		
-		
 		while(true)
-		{			
-			//Player 1
-			printArray(board);		
-			System.out.println("Player 1 Turn: ");
-			int player1_choice = sc.nextInt();
+		{	
+			printArray(board);
+			//Player 1			
+			System.out.println("Player's Turn: ");
+			int player_choice = sc.nextInt();
 
-			while((spots_left.contains(player1_choice)) || (player1_choice > 8))
+			while((spots_left.contains(player_choice)) || (player_choice > 8))
 			{
-				System.out.println("Invalid Input");
-				System.out.println("Player 1 Turn: ");
-				player1_choice = sc.nextInt();
+				System.out.println("Invalid Input Choose Another Spot: ");
+				player_choice = sc.nextInt();
 			}
-			spots_left.add(player1_choice);
-			int player1_i = player1_choice / 3;
-			int player1_j = player1_choice % 3;
+			spots_left.add(player_choice);
+			int player_i = player_choice / 3;
+			int player_j = player_choice % 3;
 			
-			board[player1_i][player1_j] = 'X';
+			board[player_i][player_j] = 'X';
 			
 			if(checkGameOver(board))
 				break;
 			
-		
-			System.out.println("AI Chooses: " + ai.chooseSpot(board));
-			System.out.println("Doubler says: " + ai.doubler());
+			//waiting for dramatic effect
+			printArray(board);
+			System.out.println("Thinking...");
 			
-			//Player 2	
-			printArray(board);		
-			System.out.println("Player 2 Turn: ");
-			int player2_choice = sc.nextInt();
-
-			while((spots_left.contains(player2_choice)) || (player2_choice > 8))
-			{
-				System.out.println("Invalid Input");
-				System.out.println("Player 1 Turn: ");
-				player2_choice = sc.nextInt();
+			try {
+			    Thread.sleep(3000); // 1000 milliseconds = 1 second
+			} 
+			catch (InterruptedException e) {
+			    e.printStackTrace();
 			}
-			spots_left.add(player2_choice);
-			int player2_i = player2_choice / 3;
-			int player2_j = player2_choice % 3;
 			
-			board[player2_i][player2_j] = 'O';
+			//Computer	
+			int comp_choice = ai.chooseSpot(board);
+
+			spots_left.add(comp_choice);
+			int comp_i = comp_choice / 3;
+			int comp_j = comp_choice % 3;
+			
+			board[comp_i][comp_j] = 'O';
 			
 			if(checkGameOver(board))
 				break;
