@@ -29,9 +29,16 @@ public class GameAI {
 	public int chooseSpot(char[][] board)
 	{
 		updateBoard(board);
-		return firstFourMoves(board);
+		
+		int t = tripler(board);
+		if(t!=-1) return t;
+		
+		int d = doubler(board);
+		if(d!=-1) return d;
+		
+		return singler(board);
 	}
-	private int firstFourMoves(char[][] board)
+	private int singler(char[][] board)
 	{
 		
 		int[] order_arr = {4, 1, 3, 5, 7, 0, 2, 6, 8};
@@ -42,15 +49,41 @@ public class GameAI {
 		}
 		return -1;
 	}
+	public int doubler(char[][] board)
+	{
+		return -1;
+	}
 	public int tripler(char[][] board)
 	{
 		//rows
 		for(int i=0; i<3; i++)
-		{
 			for(int j=0; j<3; j++)
 				if((board[i][j] == board[i][(j+1)%3])&&(board[i][j] != ' ')&&(board[i][(j+2)%3] == ' '))
 					//cond1:if 2 r matching | cond2: 2 matching r not null | cond3: 1 not matching is null
-					return i*3 + ((j+2)%3);		
+					return i*3 + ((j+2)%3);	
+		
+		//columns
+		for(int i=0; i<3; i++)
+			for(int j=0; j<3; j++)
+				if((board[j][i] == board[(j+1)%3][i])&&(board[j][i] != ' ')&&(board[(j+2)%3][i] == ' '))
+					//cond1:if 2 r matching | cond2: 2 matching r not null | cond3: 1 not matching is null
+					return ((j+2)%3)*3 + i;
+		
+		//diagonals
+		//diagonal1
+		for(int i=0; i<3; i++)
+		{
+			if((board[i][i] == board[(i+1)%3][(i+1)%3])&&(board[i][i] != ' ')&&(board[(i+2)%3][(i+2)%3] == ' '))
+				//cond1:if 2 r matching | cond2: 2 matching r not null | cond3: 1 not matching is null
+				return ((i+2)%3*3) + ((i+2)%3);	
+		}
+		//diagonal2 
+		int[] is = {0, 1, 2}, js = {2, 1, 0};//using these arrays to get appropriate kth [i][j] pair | is[k+n], js[k+n] represent i+n, j+n from above
+		for(int k=0; k<3; k++)
+		{	
+			if((board[is[k]][js[k]] == board[is[(k+1)%3]][js[(k+1)%3]])&&(board[is[k]][js[k]] != ' ')&&(board[is[(k+2)%3]][js[(k+2)%3]] == ' '))
+				//cond1:if 2 r matching | cond2: 2 matching r not null | cond3: 1 not matching is null
+				return (is[(k+2)%3]) + (js[(k+2)%3]);	
 		}
 		return -1;
 	}
