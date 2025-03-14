@@ -42,29 +42,30 @@ public class Main
 			if(((board[0][0] == 'O')&&(board[2][2] == 'O')) || ((board[0][2] == 'O')&&(board[2][0] == 'O')))
 				return -1;
 		}
-		//Draw
+		//Game still running
 		for(char i[] : board)
 			for(char j : i)
 				if(j==' ')
-					return 0;
-		
-		return 2;	
+					return 2;
+		//Draw
+		return 0;	
 	}
 	public static boolean checkGameOver(char[][] board)
 	{
-		if(gameOver(board) == 1) 
+		int game_over = gameOver(board);
+		if(game_over == 1) 
 		{
 			printArray(board);
 			System.out.println("Player 1 Wins!");
 			return true;
 		}
-		else if(gameOver(board) == -1)	
+		else if(game_over == -1)	
 		{
 			printArray(board);
 			System.out.println("Player 2 Wins!");
 			return true;
 		}
-		else if(gameOver(board) == 2)
+		else if(game_over == 0)
 		{
 			printArray(board);
 			System.out.println("Its a Draw!");

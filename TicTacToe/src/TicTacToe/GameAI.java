@@ -1,7 +1,8 @@
 package TicTacToe;
 import java.util.*;
 
-public class GameAI {
+public class GameAI 
+{
 	char[][] board;
 	Set<Integer> spaces_left = new HashSet<>();
 	
@@ -11,6 +12,7 @@ public class GameAI {
 		for(int i=0; i<9; i++)
 			spaces_left.add(i);
 	}
+	
 	private void updateBoard(char[][] board) 
 	{
 		this.board = board;
@@ -22,8 +24,6 @@ public class GameAI {
 					spaces_left.remove(k);
 				k++;
 			}
-		System.out.println(spaces_left);
-		
 	}
 	
 	public int chooseSpot(char[][] board)
@@ -38,6 +38,7 @@ public class GameAI {
 		
 		return singler();
 	}
+	
 	private int singler()
 	{
 		
@@ -49,10 +50,12 @@ public class GameAI {
 		}
 		return -1;
 	}
+	
 	public int doubler()
 	{
 		return -1;
 	}
+	
 	private int tripler()
 	{
 		//rows
