@@ -42,7 +42,7 @@ public class GameAI
 	private int singler()
 	{
 		
-		int[] order_arr = {4, 1, 3, 5, 7, 0, 2, 6, 8};
+		int[] order_arr = {4, 0, 2, 6, 8, 1, 3, 5, 7};
 		for(int i : order_arr)
 		{
 			if(spaces_left.contains(i))
@@ -53,7 +53,7 @@ public class GameAI
 	
 	public int doubler()
 	{
-		
+		if(spaces_left.size() > 6) return -1;
 		int def_sol = -1, i_arr[] = {1, 0, 2}; //return defending solution only if there is no attack on the board
 		
 		for(int i : i_arr)
