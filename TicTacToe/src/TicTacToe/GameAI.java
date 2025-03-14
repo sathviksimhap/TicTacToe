@@ -82,11 +82,8 @@ public class GameAI {
 		for(int k=0; k<3; k++)
 		{	
 			if((board[is[k]][js[k]] == board[is[(k+1)%3]][js[(k+1)%3]])&&(board[is[k]][js[k]] != ' ')&&(board[is[(k+2)%3]][js[(k+2)%3]] == ' '))
-			{
-				System.out.println("d2, k:"+ k);
 				//cond1:if 2 r matching | cond2: 2 matching r not null | cond3: 1 not matching is null
 				return (is[(k+2)%3])*3 + (js[(k+2)%3]);	
-			}
 		}
 		return -1;
 	}
