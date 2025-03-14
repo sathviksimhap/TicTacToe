@@ -110,7 +110,7 @@ public class Main
 			
 		
 			System.out.println("AI Chooses: " + ai.chooseSpot(board));
-			System.out.println("Tripler says: " + ai.tripler(board));
+			System.out.println("Doubler says: " + ai.doubler());
 			
 			//Player 2	
 			printArray(board);		

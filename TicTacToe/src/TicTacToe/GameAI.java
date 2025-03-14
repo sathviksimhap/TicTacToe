@@ -30,15 +30,15 @@ public class GameAI {
 	{
 		updateBoard(board);
 		
-		int t = tripler(board);
+		int t = tripler();
 		if(t!=-1) return t;
 		
-		int d = doubler(board);
+		int d = doubler();
 		if(d!=-1) return d;
 		
-		return singler(board);
+		return singler();
 	}
-	private int singler(char[][] board)
+	private int singler()
 	{
 		
 		int[] order_arr = {4, 1, 3, 5, 7, 0, 2, 6, 8};
@@ -49,11 +49,11 @@ public class GameAI {
 		}
 		return -1;
 	}
-	public int doubler(char[][] board)
+	public int doubler()
 	{
 		return -1;
 	}
-	public int tripler(char[][] board)
+	private int tripler()
 	{
 		//rows
 		for(int i=0; i<3; i++)
@@ -82,8 +82,11 @@ public class GameAI {
 		for(int k=0; k<3; k++)
 		{	
 			if((board[is[k]][js[k]] == board[is[(k+1)%3]][js[(k+1)%3]])&&(board[is[k]][js[k]] != ' ')&&(board[is[(k+2)%3]][js[(k+2)%3]] == ' '))
+			{
+				System.out.println("d2, k:"+ k);
 				//cond1:if 2 r matching | cond2: 2 matching r not null | cond3: 1 not matching is null
-				return (is[(k+2)%3]) + (js[(k+2)%3]);	
+				return (is[(k+2)%3])*3 + (js[(k+2)%3]);	
+			}
 		}
 		return -1;
 	}
