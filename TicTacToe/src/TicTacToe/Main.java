@@ -2,7 +2,7 @@ package TicTacToe;
 import java.util.*;
 
 public class Main 
-{
+{	
 	public static void printArray(char[][] arr)
 	{
 		System.out.println("Current Board: ");
@@ -74,31 +74,43 @@ public class Main
 		else
 			return false;
 	}
+	public void player()
+	{
+			
+	}
+	public void computer()
+	{
+		
+	}
 	public static void main(String[] args) 
 	{
 		char board[][] = {{' ', ' ',' '},{' ', ' ',' '},{' ', ' ',' '}};
-		Set<Integer> spots_left = new HashSet<>();
-		
-		Scanner sc = new Scanner(System.in);
-
-		System.out.println("Input for your choices: ");
-		System.out.println("[0][1][2]\n[3][4][5]\n[6][7][8]");
+		Set<Integer> spots_used = new HashSet<>();
 		
 		GameAI ai = new GameAI(board);
+		Scanner sc = new Scanner(System.in);
 		
-		while(true)
+		System.out.println("Input for your choices: ");
+		System.out.println("[0][1][2]\n[3][4][5]\n[6][7][8]");
+		System.out.println("Would You Like To Go First(f) or Second(s): ");
+		
+		char fs = sc.next().charAt(0);
+		boolean fsb = false;
+		if(fs=='f') fsb = true;
+		
+		while(fsb)
 		{	
 			printArray(board);
-			//Player 1			
+			//Player
 			System.out.println("Player's Turn: ");
 			int player_choice = sc.nextInt();
 
-			while((spots_left.contains(player_choice)) || (player_choice > 8))
+			while((spots_used.contains(player_choice)) || (player_choice > 8))
 			{
 				System.out.println("Invalid Input Choose Another Spot: ");
 				player_choice = sc.nextInt();
 			}
-			spots_left.add(player_choice);
+			spots_used.add(player_choice);
 			int player_i = player_choice / 3;
 			int player_j = player_choice % 3;
 			
@@ -107,6 +119,8 @@ public class Main
 			if(checkGameOver(board))
 				break;
 			
+			printArray(board);
+			//Computer
 			//waiting for dramatic effect
 			printArray(board);
 			System.out.println("Thinking...");
@@ -121,7 +135,7 @@ public class Main
 			//Computer	
 			int comp_choice = ai.chooseSpot(board);
 
-			spots_left.add(comp_choice);
+			spots_used.add(comp_choice);
 			int comp_i = comp_choice / 3;
 			int comp_j = comp_choice % 3;
 			
@@ -129,6 +143,50 @@ public class Main
 			
 			if(checkGameOver(board))
 				break;
+		}
+		while(!fsb)
+		{	
+			//waiting for dramatic effect
+			printArray(board);
+			System.out.println("Thinking...");
+			
+			try {
+			    Thread.sleep(3000); // 1000 milliseconds = 1 second
+			} 
+			catch (InterruptedException e) {
+			    e.printStackTrace();
+			}
+			
+			//Computer	
+			int comp_choice = ai.chooseSpot(board);
+
+			spots_used.add(comp_choice);
+			int comp_i = comp_choice / 3;
+			int comp_j = comp_choice % 3;
+			
+			board[comp_i][comp_j] = 'O';
+			
+			if(checkGameOver(board))
+				break;
+			
+			printArray(board);
+			//Player 1			
+			System.out.println("Player's Turn: ");
+			int player_choice = sc.nextInt();
+
+			while((spots_used.contains(player_choice)) || (player_choice > 8))
+			{
+				System.out.println("Invalid Input Choose Another Spot: ");
+				player_choice = sc.nextInt();
+			}
+			spots_used.add(player_choice);
+			int player_i = player_choice / 3;
+			int player_j = player_choice % 3;
+			
+			board[player_i][player_j] = 'X';
+			
+			if(checkGameOver(board))
+				break;			
 		}
 		sc.close();
 	}

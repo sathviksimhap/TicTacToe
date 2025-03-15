@@ -53,7 +53,7 @@ public class GameAI
 	
 	public int doubler()
 	{
-		if(spaces_left.size() > 6) return -1;
+		if(spaces_left.size() > 5) return -1;
 		int def_sol = -1, i_arr[] = {1, 0, 2}; //return defending solution only if there is no attack on the board
 		
 		for(int i : i_arr)
